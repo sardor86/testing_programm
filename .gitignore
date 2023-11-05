@@ -1,0 +1,6 @@
+.idea/
+venv/
+__pycache__/
+XlsxReader/__pycache__/
+
+questions.xlsx

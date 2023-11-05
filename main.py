@@ -7,7 +7,8 @@ import random
 class Question:
     def __init__(self, question_path):
         self.correct = None
-        self.result = 0
+        self.correct_answer = 0
+        self.uncorrect_answer = 0
         self.row = 0
 
         self.xlsx = XlsxReader(question_path)
@@ -15,7 +16,7 @@ class Question:
 
     def next(self):
         if self.xlsx.row_size == self.row:
-            self.window.results(self.result)
+            self.window.draw_results(self.correct_answer, self.uncorrect_answer)
             exit()
 
         self.row += 1
@@ -36,10 +37,11 @@ class Question:
 
 def command(choose: str, quest: Question):
     if quest.correct == choose:
-        quest.result += 1
-        print('\u001b[32m Правильно')
+        quest.correct_answer += 1
+        quest.window.correct_result_label.configure(text=f'Праильные {quest.correct_answer}')
     else:
-        print('\u001b[31m Неправильно')
+        quest.uncorrect_answer += 1
+        quest.window.uncorrect_result_label.configure(text=f'Неправильные {quest.uncorrect_answer}')
     quest.next()
 
 

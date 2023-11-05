@@ -31,9 +31,16 @@ class Window:
         self.answer_D = tk.Label(self.root)
         self.answer_D.grid(row=4, column=1)
 
-    def results(self, result: int):
+        self.correct_result_label = tk.Label(self.root, fg='green', text='Правильные 0')
+        self.correct_result_label.grid(row=5, column=0)
+        self.uncorrect_result_label = tk.Label(self.root, fg='red', text='Неправильные 0')
+        self.uncorrect_result_label.grid(row=5, column=1)
+
+    @staticmethod
+    def draw_results(correct_answer: int, uncorrect_answer):
         mb.showerror('Количество правильных ответов',
-                     f'Количество правильных ответов {result}')
+                     message=f'Количество правильных ответов {correct_answer}\n'
+                             f'Количество неправильных ответов {uncorrect_answer}')
 
     def draw(self):
         self.root.mainloop()
